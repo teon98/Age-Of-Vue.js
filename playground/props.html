@@ -14,6 +14,16 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script>
+      var appHeader = {
+        template: `<h1>{{ propsdata }}</h1>`,
+        props: ['propsdata'], //propsdata 이름 안에 있는 data 받을께
+      };
+
+      var appContent = {
+        template: '<di>{{ propsdata }}</div>',
+        props: ['propsdata'],
+      };
+
       new Vue({
         el: '#app',
         components: {
@@ -25,16 +35,6 @@
           num: 10,
         },
       });
-
-      var appHeader = {
-        template: `<h1>{{ propsdata }}</h1>`,
-        props: ['propsdata'], //propsdata 이름 안에 있는 data 받을께
-      };
-
-      var appContent = {
-        template: '<di>{{ propsdata }}</div>',
-        props: ['propsdata'],
-      };
     </script>
   </body>
 </html>
