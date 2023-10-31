@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <app-header v-bind:propsdata="num"></app-header>
+      <app-content v-on:pass="deliverNum"></app-content>
+    </div>
+    <!-- {{}} 콧수염 괄호 문법 이라고 한다. -->
+    <!-- vue cdn -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      //지역 vue - 1
+      var appHeader = {
+        template: '<div>header</div>',
+        props: ['propsdata'],
+      };
+
+      //지역 vue - 2
+      var appContent = {
+        template:
+          '<div>content<button v-on:click="passNum">pass</button></div>',
+        methods: {
+          passNum: function () {
+            this.$emit('pass', 10);
+          },
+        },
+      };
+
+      //전역 vue - Root 컴포넌트가 된다.
+      new Vue({
+        el: '#app',
+        components: {
+          'app-header': appHeader,
+          'app-content': appContent,
+        },
+        data: {
+          num: 0,
+        },
+        methods: {
+          deliverNum: function (value) {
+            this.num = value;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
