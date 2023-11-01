@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <button v-on:click="getData">get user</button>
+      <div>{{users}}</div>
+    </div>
+    <!-- axios -->
+    <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
+    <!-- vue-->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+      new Vue({
+        el: '#app',
+        data: {
+          users: [],
+        },
+        methods: {
+          getData: function () {
+            console.log('axios 밖의 this: ', this); //Vue 객체를 가리킴
+            var vm = this;
+            axios
+              .get('https://jsonplaceholder.typicode.com/users')
+              .then(function (res) {
+                console.log(res.data);
+                console.log('axios 안의 this', this); //window 객체를 가리킴
+                vm.users = res.data;
+              })
+              .catch(function (err) {
+                console.log(err);
+              });
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
